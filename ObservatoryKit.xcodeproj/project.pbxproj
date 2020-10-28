@@ -3,13 +3,16 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		C73E142025421DB3006738CC /* ObservatoryKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C73E141625421DB3006738CC /* ObservatoryKit.framework */; };
 		C73E142525421DB3006738CC /* ObservatoryKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73E142425421DB3006738CC /* ObservatoryKitTests.swift */; };
 		C73E142725421DB3006738CC /* ObservatoryKit.h in Headers */ = {isa = PBXBuildFile; fileRef = C73E141925421DB3006738CC /* ObservatoryKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C73E14932542266D006738CC /* Observatory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73E14922542266D006738CC /* Observatory.swift */; };
+		C7D702EE2546CE2A0090DB36 /* CelestialMechanics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7D702ED2546CE2A0090DB36 /* CelestialMechanics.framework */; };
+		C7D702EF2546CE2A0090DB36 /* CelestialMechanics.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C7D702ED2546CE2A0090DB36 /* CelestialMechanics.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -22,6 +25,20 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		C73E143625421E50006738CC /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				C7D702EF2546CE2A0090DB36 /* CelestialMechanics.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		C73E141625421DB3006738CC /* ObservatoryKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ObservatoryKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C73E141925421DB3006738CC /* ObservatoryKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObservatoryKit.h; sourceTree = "<group>"; };
@@ -29,6 +46,8 @@
 		C73E141F25421DB3006738CC /* ObservatoryKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ObservatoryKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C73E142425421DB3006738CC /* ObservatoryKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservatoryKitTests.swift; sourceTree = "<group>"; };
 		C73E142625421DB3006738CC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C73E14922542266D006738CC /* Observatory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Observatory.swift; sourceTree = "<group>"; };
+		C7D702ED2546CE2A0090DB36 /* CelestialMechanics.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CelestialMechanics.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,6 +55,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C7D702EE2546CE2A0090DB36 /* CelestialMechanics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,6 +76,7 @@
 				C73E141825421DB3006738CC /* ObservatoryKit */,
 				C73E142325421DB3006738CC /* ObservatoryKitTests */,
 				C73E141725421DB3006738CC /* Products */,
+				C7D702EC2546CE2A0090DB36 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -71,6 +92,8 @@
 		C73E141825421DB3006738CC /* ObservatoryKit */ = {
 			isa = PBXGroup;
 			children = (
+				C73E149525422678006738CC /* Controllers */,
+				C73E14912542266D006738CC /* Model */,
 				C73E141925421DB3006738CC /* ObservatoryKit.h */,
 				C73E141A25421DB3006738CC /* Info.plist */,
 			);
@@ -84,6 +107,29 @@
 				C73E142625421DB3006738CC /* Info.plist */,
 			);
 			path = ObservatoryKitTests;
+			sourceTree = "<group>";
+		};
+		C73E14912542266D006738CC /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C73E14922542266D006738CC /* Observatory.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		C73E149525422678006738CC /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		C7D702EC2546CE2A0090DB36 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C7D702ED2546CE2A0090DB36 /* CelestialMechanics.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -108,12 +154,15 @@
 				C73E141225421DB3006738CC /* Sources */,
 				C73E141325421DB3006738CC /* Frameworks */,
 				C73E141425421DB3006738CC /* Resources */,
+				C73E143625421E50006738CC /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = ObservatoryKit;
+			packageProductDependencies = (
+			);
 			productName = ObservatoryKit;
 			productReference = C73E141625421DB3006738CC /* ObservatoryKit.framework */;
 			productType = "com.apple.product-type.framework";
@@ -162,6 +211,9 @@
 				Base,
 			);
 			mainGroup = C73E140C25421DB3006738CC;
+			packageReferences = (
+				C73E143225421E50006738CC /* XCRemoteSwiftPackageReference "SwiftAA" */,
+			);
 			productRefGroup = C73E141725421DB3006738CC /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -194,6 +246,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C73E14932542266D006738CC /* Observatory.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -252,6 +305,7 @@
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -316,6 +370,7 @@
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -389,6 +444,7 @@
 		C73E142E25421DB3006738CC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = J2S9726G2L;
 				INFOPLIST_FILE = ObservatoryKitTests/Info.plist;
@@ -407,6 +463,7 @@
 		C73E142F25421DB3006738CC /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = J2S9726G2L;
 				INFOPLIST_FILE = ObservatoryKitTests/Info.plist;
@@ -453,6 +510,17 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C73E143225421E50006738CC /* XCRemoteSwiftPackageReference "SwiftAA" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onekiloparsec/SwiftAA.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.3.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
 	};
 	rootObject = C73E140D25421DB3006738CC /* Project object */;
 }
