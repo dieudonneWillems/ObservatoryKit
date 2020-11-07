@@ -6,39 +6,82 @@
 //
 
 import Foundation
-import AstroAtmosphericKit
+import CelestialMechanics
+//import AstroAtmosphericKit
 
-public struct Observatory {
+public enum TwilightCondition {
+    case day
+    case civilTwilight
+    case nauticalTwilight
+    case astronomicalTwilight
+    case night
+}
+
+public protocol ObservatoryWeatherProvider {
+    
+}
+
+public struct Observatory : CustomStringConvertible {
+    
+    private static let numberOfDays = 7
     
     public let location: GeographicLocation
-    public let elevation: Double
+    public var date : Date = Date() {
+        didSet {
+            do {
+                try recalculate()
+            } catch {
+                print("WARNING: Encountered error when setting the date \(error)")
+            }
+        }
+    }
+    
+    private var events = [AstronomicalEvent]()
     
     public var siderealTime: Double {
         get {
-            return 0
+            return meanSiderealTime
         }
     }
     
-    public var sunrise: Date? {
-        get {
-            return nil
-        }
-    }
+    private var meanSiderealTime: Double
+    private var illuminatedFractionMoon: Double = 0.0
     
-    public var sunset: Date? {
-        get {
-            return nil
-        }
-    }
+    public let name: String
     
-    public var sunTransitTime: Date? {
-        get {
-            return nil
-        }
-    }
-    
-    public init(at location: GeographicLocation, elevation: Double) {
+    public init(with name: String, at location: GeographicLocation, on date: Date = Date()) throws {
         self.location = location
-        self.elevation = elevation
+        self.date = date
+        self.meanSiderealTime = 0.0
+        self.name = name
+        try self.recalculate()
+    }
+    
+    private mutating func recalculate() throws {
+        events.removeAll()
+        let sun = Sun.sun
+        let moon = Moon.moon
+        let jd0 = date.julianDay
+        for index in -1...Observatory.numberOfDays {
+            let jd = jd0 + Double(index)
+            let ndate = Date(julianDay: jd)
+            let rtsSun = try sun.risingTransitAndSetting(at: ndate, and: location)
+            let rtsMoon = try moon.risingTransitAndSetting(at: ndate, and: location)
+            events.append(contentsOf: rtsSun)
+            events.append(contentsOf: rtsMoon)
+        }
+        events.sort {
+            $0.date < $1.date
+        }
+    }
+    
+    public var description: String {
+        get {
+            var string = "Observatory \(self.name) at \(self.location) on date: \(self.date)\n"
+            for event in events {
+                string = string + "\(event)\n"
+            }
+            return string
+        }
     }
 }

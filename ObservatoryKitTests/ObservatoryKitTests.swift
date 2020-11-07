@@ -6,6 +6,7 @@
 //
 
 import XCTest
+import CelestialMechanics
 @testable import ObservatoryKit
 
 class ObservatoryKitTests: XCTestCase {
@@ -19,8 +20,20 @@ class ObservatoryKitTests: XCTestCase {
     }
 
     func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        let calendar = Calendar.current
+        var dateComponents = DateComponents()
+        dateComponents.year = 2020
+        dateComponents.month = 11
+        dateComponents.day = 1
+        dateComponents.timeZone = TimeZone(abbreviation: "GMT")
+        dateComponents.hour = 0
+        dateComponents.minute = 0
+        dateComponents.second = 0
+        let date = calendar.date(from: dateComponents)!
+        let eidsvoll = GeographicLocation(latitude: 60.331/Double.rpi, longitude: 11.263/Double.rpi, elevation: 120)
+        var observatory = try Observatory(with: "Eidsvoll, Norway", at: eidsvoll)
+        observatory.date = date
+        print(observatory)
     }
 
     func testPerformanceExample() throws {
