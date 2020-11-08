@@ -36,7 +36,12 @@ public struct Observatory : CustomStringConvertible {
         }
     }
     
-    private var events = [AstronomicalEvent]()
+    /**
+     * The date for which the events were calculated.
+     */
+    private var calculatedForDate: Date? = nil
+    
+    public var events = [AstronomicalEvent]()
     
     public var siderealTime: Double {
         get {
@@ -58,6 +63,10 @@ public struct Observatory : CustomStringConvertible {
     }
     
     private mutating func recalculate() throws {
+        // If the calculated date is within half a day of the set date, nor data is recalculated.
+        if calculatedForDate != nil && fabs(calculatedForDate!.timeIntervalSince(date)) < 0.5*Date.lengthOfDay {
+            return
+        }
         events.removeAll()
         let sun = Sun.sun
         let moon = Moon.moon
@@ -70,16 +79,23 @@ public struct Observatory : CustomStringConvertible {
             events.append(contentsOf: rtsSun)
             events.append(contentsOf: rtsMoon)
         }
+        events = AstronomicalEvent.removeDuplicates(events: events)
+        let startDate = Date(julianDay: date.julianDay-1).midnight
+        let endDate = Date(julianDay: date.julianDay + Double(Observatory.numberOfDays+1)).midnight
+        events = AstronomicalEvent.filter(events: events, start: startDate, end: endDate)
         events.sort {
             $0.date < $1.date
         }
+        calculatedForDate = date
     }
     
     public var description: String {
         get {
             var string = "Observatory \(self.name) at \(self.location) on date: \(self.date)\n"
+            var i = 1
             for event in events {
-                string = string + "\(event)\n"
+                string = string + "[\(i)] \(event)\n"
+                i = i + 1
             }
             return string
         }
