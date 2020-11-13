@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -212,7 +212,6 @@
 			);
 			mainGroup = C73E140C25421DB3006738CC;
 			packageReferences = (
-				C73E143225421E50006738CC /* XCRemoteSwiftPackageReference "SwiftAA" */,
 			);
 			productRefGroup = C73E141725421DB3006738CC /* Products */;
 			projectDirPath = "";
@@ -512,17 +511,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		C73E143225421E50006738CC /* XCRemoteSwiftPackageReference "SwiftAA" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/onekiloparsec/SwiftAA.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.3.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
 	};
 	rootObject = C73E140D25421DB3006738CC /* Project object */;
 }
